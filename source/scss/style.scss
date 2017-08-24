@@ -1,0 +1,9 @@
+$primary-color:red;
+
+body {color: $primary-color}
+
+.card {
+	transform: rotate(120deg);
+	opacity: .6;
+	filter: blur(3px)
+}
