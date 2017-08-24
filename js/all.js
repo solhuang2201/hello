@@ -1,0 +1,2 @@
+"use strict";var header=document.querySelector("header"),headroom=new Headroom(header);headroom.init(),$(".drawer").drawer(),$("[data-submenu]").submenupicker(),wow=new WOW({mobile:!1}),wow.init(),$(window).scroll(function(){$(window).scrollTop(),$("footer").scrollTop();var o=$("#goTop");$(window).scrollTop()+$(window).height()>$(document).height()-150?o.addClass("bottom"):o.removeClass("bottom")}),$("#goTop").click(function(){return $("body,html").stop(!1,!1).animate({scrollTop:0},800),!1});
+//# sourceMappingURL=all.js.map
