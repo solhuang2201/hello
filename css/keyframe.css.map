@@ -1,1 +1,0 @@
-{"version":3,"sources":["keyframe.scss"],"names":[],"mappings":"AAEA,KAAM,MAAA,IAEN,MACI,kBAAA,eAAA,cAAA,eAAA,UAAA,eACA,QAAA,GACA,eAAA,UAAA,OAAA","file":"keyframe.css","sourcesContent":["$primary-color:red;\r\n\r\nbody {color: $primary-color}\r\n\r\n.card {\r\n    transform: rotate(120deg);\r\n    opacity: .6;\r\n    filter: blur(3px)\r\n}"]}
