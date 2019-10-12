@@ -1,11 +1,11 @@
 // 引入工具
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
-var autoprefixer = require('autoprefixer');
+var gulp           = require('gulp');
+var $              = require('gulp-load-plugins')();
+var autoprefixer   = require('autoprefixer');
 var mainBowerFiles = require('main-bower-files');
-var browserSync = require('browser-sync').create();
-var minimist = require('minimist')
-var gulpSequence = require('gulp-sequence')
+var browserSync    = require('browser-sync').create();
+var minimist       = require('minimist')
+var gulpSequence   = require('gulp-sequence')
 
 // gulp --env production 壓縮輸出
 var envOption = {
@@ -29,9 +29,13 @@ gulp.task('sass', function () {
     autoprefixer({browsers: ['last 3 version', '>5%', 'ie 8']})
   ];
   return gulp.src('./source/scss/**/*.scss')
+    .pipe($.wait(1000))
   	.pipe($.plumber())
     .pipe($.sourcemaps.init())
-    .pipe($.sass().on('error', $.sass.logError))
+    .pipe($.sass({
+      errLogToConsole: true,
+      outputStyle: 'expanded'
+    }).on('error', $.sass.logError))
     // 編譯完成 css
   	.pipe($.postcss(plugins))
     // 壓縮 css // if it is production
@@ -62,24 +66,51 @@ gulp.task('babel', () => {
 });
 
 // 外部套件
-gulp.task('bower', function() {
-  return gulp.src(mainBowerFiles())
-    .pipe(gulp.dest('./.tmp/vendors'))
-});
+// gulp.task('bower', function() {
+//   gulp.src(mainBowerFiles(['**/*.js']))
+//     .pipe(gulp.dest('./.tmp/vendors/js'))
+
+//   gulp.src(mainBowerFiles(['**/*.css']))
+//     .pipe(gulp.dest('./.tmp/vendors/css'))
+
+//   gulp.src(mainBowerFiles(['/fontawesome/fonts/**.*']))
+//     .pipe(gulp.dest('./.tmp/vendors/fonts'))
+
+//   gulp.src(mainBowerFiles(['/bootstrap-sass/assets/fonts/bootstrap/**.*']))
+//     .pipe(gulp.dest('./.tmp/vendors/fonts'))
+// });
 
 // 套件載入
-gulp.task('vendorsJs', ['bower'], function() {
-  return gulp.src('./.tmp/vendors/**/**.js')
-    .pipe($.order([
-      'jquery.js',
-      'bootstrap.js',
-      '**.js'
-    ]))
-    .pipe($.concat('vendors.js'))
+// gulp.task('vendors', ['bower'], function() {
+//   gulp.src('./.tmp/vendors/js/**.js')    
+//     // 壓縮 // if it is production
+//     .pipe($.if(options.env === 'production', $.uglify()))
+//     .pipe(gulp.dest('./public/js/vendors'))
+
+//   gulp.src('./.tmp/vendors/css/**.css')    
+//     // 壓縮 // if it is production
+//     .pipe($.if(options.env === 'production', $.uglify()))
+//     .pipe(gulp.dest('./public/css/vendors'))
+
+//   gulp.src('./.tmp/vendors/fonts/**.*')    
+//     .pipe(gulp.dest('./public/fonts'))
+// })
+
+gulp.task('vendors', function() {
+
+  gulp.src('./source/vendors/js/**/*.js')
     // 壓縮 js // if it is production
-    .pipe($.if(options.env === 'production', $.uglify()))
-    .pipe(gulp.dest('./public/js'))
-})
+    // .pipe($.if(options.env === 'production', $.uglify()))
+    .pipe(gulp.dest('./public/js/vendors'))
+
+  gulp.src('./source/vendors/css/**/**.css')
+    // 壓縮 // if it is production
+    .pipe($.if(options.env === 'production', $.cleanCss()))
+    .pipe(gulp.dest('./public/css/vendors'))
+
+  gulp.src('./source/fonts/**/**.*')
+    .pipe(gulp.dest('./public/fonts'))
+});
 
 // 建立虛擬空間
 gulp.task('browser-sync', function() {
@@ -92,7 +123,7 @@ gulp.task('browser-sync', function() {
 
 // 圖片壓縮
 gulp.task('imagemin', () =>
-    gulp.src('./source/images/*')
+    gulp.src('./source/images/**/*.*')
         .pipe($.if(options.env === 'production', $.imagemin()))
         .pipe(gulp.dest('./public/images'))
 );
@@ -117,7 +148,7 @@ gulp.task('deploy', function() {
 });
 
 // 完成交付 輸入 gulp bulid --env production
-gulp.task('bulid', gulpSequence('clean', 'jade', 'sass', 'babel', 'vendorsJs'))
+gulp.task('bulid', gulpSequence('clean', 'jade', 'sass', 'babel', 'vendors', 'imagemin'))
 
 // 直接執行 開發模式 gulp
-gulp.task('default', ['jade', 'sass', 'babel', 'vendorsJs', 'browser-sync', 'imagemin', 'watch']);
+gulp.task('default', ['jade', 'sass', 'babel', 'vendors', 'browser-sync', 'imagemin', 'watch']);

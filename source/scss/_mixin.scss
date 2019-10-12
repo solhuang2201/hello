@@ -1,0 +1,103 @@
+@mixin hidden_border {
+    outline: none !important;
+    outline-color: transparent !important;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+@mixin ele_pseudo {
+	display: block;
+	content:'';
+}
+
+@mixin ele_tail {
+	position: relative;
+	padding-left: 50px;
+	&:before {
+		@include ele_pseudo;
+		width: 30px;
+		height: 3px;
+		background-color: $c_blue;	
+		background-image: $g_blue;
+		position: absolute;
+		left: 0;
+		top: 15px;
+	}
+}
+
+@mixin eff_tilt {
+	position: relative;
+	width: 100%;
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+	.tilt__back, .tilt__front {
+		background-size: auto 100%;
+	}
+}
+
+@mixin anim_ring {
+	position: relative;
+	overflow: hidden;
+	span.rings {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		span.ring {
+			display: block;
+			position: absolute;
+			background-color: #eaeaea;
+  			transition: all ease-out 0.3s;
+		}
+		span.ring_top, span.ring_bottom {
+			width: 100%;
+			height: 1px;
+		}
+		span.ring_right, span.ring_left {
+			width: 1px;
+			height: 100%;
+		}
+		span.ring_top {
+			top: 0;
+			left: -100%;
+		}
+		span.ring_bottom {
+			bottom: 0;
+			right: -100%;
+		}
+		span.ring_right {
+			right: 0;
+			top: -100%;
+		}
+		span.ring_left {
+			left: 0;
+			bottom: -100%;
+		}
+	}
+	&:hover {
+		span.rings {
+			span.ring_top {
+				left: 0%;
+			}
+			span.ring_bottom {
+				right: 0%;
+			}
+			span.ring_right {
+				top: 0%;
+			}
+			span.ring_left {
+				bottom: 0%;
+			}
+		}
+
+	} 
+}

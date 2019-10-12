@@ -1,0 +1,471 @@
+/* COMMON
+====================== */
+
+html,
+body {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #eaeaea;
+    font-family: Arial, "微軟正黑體", "Apple LiGothic", sans-serif;
+    font-size: 14px;
+}
+
+ul,
+ol {
+    list-style: none;
+    padding-inline-start: 0px;
+    -webkit-padding-start: 0px;
+}
+
+a {
+    color: inherit;
+    outline: none !important;
+    text-decoration: none;
+    transition: all ease-out 0.3s;
+}
+
+input,
+button,
+select,
+textarea {
+    outline: none !important;
+    text-decoration: none;
+    transition: all ease-out 0.3s;
+}
+
+::-moz-focus-inner {
+    border: 0;
+}
+
+textarea {
+    resize: none;
+}
+
+a {
+    &:hover,
+    &:link,
+    &:active {
+        @include hidden_border;
+    }
+}
+
+input[type="text"]:focus,
+*:focus {
+    @include hidden_border;
+}
+
+button {
+    &:active,
+    &:visited {
+        @include hidden_border;
+    }
+    &::-moz-focus-inner,
+    &::focus-inner {
+        border: 0 none;
+    }
+}
+
+::selection,
+ ::-moz-selection {
+    background: #008BD5;
+    color: #fff;
+}
+
+img {
+    -moz-user-select: none;
+}
+
+.section {
+    position: relative;
+    z-index: 2;
+    transition-duration: .3s;
+}
+
+.wrap {
+    width: 100%;
+    height: auto;
+    margin: auto;
+    padding-top: 0px;
+    background-color: transparent;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+
+.header,
+.main,
+.foo {
+    display: inline-block;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+}
+
+.main {
+    background: none;
+}
+
+.sec {
+    position: relative;
+    z-index: 2;
+    transition-duration: .3s;
+}
+
+.block {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.overlay {
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**/
+
+
+/***** width *****/
+
+@for $w from 1 through 2 {
+    .w#{$w*50} {
+        width: 50px * $w;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**/
+
+
+/***** margin *****/
+
+@for $mt from 1 through 6 {
+    .mt#{$mt*5} {
+        margin-top: 5px * $mt;
+    }
+}
+
+@for $mb from 1 through 6 {
+    .mb#{$mb*5} {
+        margin-bottom: 5px * $mb;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**/
+
+
+/***** padding *****/
+
+@for $pt from 1 through 6 {
+    .pt#{$pt*5} {
+        padding-top: 5px * $pt;
+    }
+}
+
+@for $pb from 1 through 6 {
+    .pb#{$pb*5} {
+        padding-bottom: 5px * $pb;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**/
+
+
+/***** bootstrap *****/
+
+
+/* no-gutters */
+
+[class^='container'].no-gutters {
+    >.row {
+        margin-right: 0;
+        margin-left: 0;
+        > {
+            [class^="col-"],
+            [class*=" col-"] {
+                padding-right: 0;
+                padding-left: 0;
+            }
+        }
+    }
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+    > {
+        [class^="col-"],
+        [class*=" col-"] {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* flex */
+
+.flex {
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+[class^='container'].flex {
+    height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*animate*/
+
+.animated.flash {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*star*/
+
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*pace*/
+
+.page-loaded {
+    .bg_bark {
+        display: block;
+        width: 100vw;
+        height: 0;
+        background: url(../images/bg.png) repeat-x center 0;
+        background-position: 0 center;
+        background-size: 100% 100%;
+        position: fixed;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transition: all .0s;
+    }
+    #particles-js {
+        transform: scale(0);
+        transform-origin: center center;
+        transition: all .0s .0s;
+    }
+    .bg_line_str {
+        transform: translate3d(0px, -100%, 0);
+        transition: all .0s .0s;
+    }
+    .loading_bar {
+        display: block;
+        width: 240px;
+        height: 32px;
+        background-image: url(../images/bg_loading.jpg);
+        background-repeat: repeat-x;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-left: -120px;
+        margin-top: -15px;
+        z-index: 100;
+        overflow: hidden;
+        animation-duration: 10s;
+        animation-name: move_bg;
+        transform-origin: left center;
+        animation-iteration-count: infinite;
+        transition: opacity .3s;
+        img {
+            display: block;
+            width: 96%;
+            height: auto;
+            margin: 1% 2%;
+        }
+    }
+    .wrap {
+        opacity: 0;
+        transition: opacity .0s .0s;
+        transition-timing-function: ease-in-out;
+    }
+    &.pace-done {
+        .bg_bark {
+            height: 100vh;
+            top: 0%;
+            transition: all .3s;
+        }
+        #particles-js {
+            transform: scale(1);
+            transition: all .6s .4s;
+        }
+        .bg_line_str {
+            transform: translate3d(0px, 0%, 0);
+            transition: all .6s .3s;
+        }
+        .loading_bar {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .wrap {
+            opacity: 1;
+            transition: all .6s 1s;
+        }
+    }
+}
+
+.pace {
+    -webkit-pointer-events: none;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+    &.pace-inactive {
+        display: none;
+    }
+    .pace-progress {
+        background: $c_blue url(../images/bg_loading.jpg) no-repeat left center;
+        position: fixed;
+        z-index: 2000;
+        top: 0;
+        right: 100%;
+        width: 100%;
+        height: 4px;
+        -webkit-box-shadow: 5px 0 10px $c_blue, 5px 0 5px $c_blue;
+        box-shadow: 5px 0 10px $c_blue, 5px 0 5px $c_blue;
+    }
+    .pace-activity {
+        background: $c_gray_001;
+        position: fixed;
+        z-index: 1999;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 2px;
+    }
+}
