@@ -37,6 +37,6 @@
     "gulp-uglify": "3.0.0",
     "gulp-wait": "0.0.2",
     "main-bower-files": "2.13.1",
-    "minimist": "1.2.0"
+    "minimist": "1.2.5"
   }
 }
